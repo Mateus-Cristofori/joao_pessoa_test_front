@@ -1,0 +1,752 @@
+/* Tudo escopado em .tickets-layout, então a tela não depende do CSS do Dashboard. */
+
+.tickets-layout {
+  --tk-bg: #fafafa;
+  --tk-surface: #ffffff;
+  --tk-border: #e8eaf0;
+  --tk-text: #0f172a;
+  --tk-muted: #64748b;
+  --tk-soft: #94a3b8;
+  --tk-primary: #4f46e5;
+  --tk-primary-hover: #4338ca;
+  --tk-primary-soft: #eef2ff;
+  --tk-danger: #e11d48;
+  --tk-radius: 14px;
+
+  display: flex;
+  min-height: 100vh;
+  background: var(--tk-bg);
+  color: var(--tk-text);
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.tickets-layout *,
+.tickets-layout *::before,
+.tickets-layout *::after {
+  box-sizing: border-box;
+}
+
+.tickets-main {
+  flex: 1;
+  min-width: 0;
+  padding: 32px;
+}
+
+.tickets-container {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+/* -------------------------------- Cabeçalho -------------------------------- */
+
+.tickets-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.tickets-header h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.tickets-header p {
+  margin: 6px 0 0;
+  font-size: 14px;
+  color: var(--tk-muted);
+}
+
+/* -------------------------------- Botões -------------------------------- */
+
+.tk-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+
+.tk-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.tk-btn-primary {
+  background: var(--tk-primary);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+}
+
+.tk-btn-primary:hover:not(:disabled) {
+  background: var(--tk-primary-hover);
+}
+
+.tk-btn-ghost {
+  background: var(--tk-surface);
+  border-color: var(--tk-border);
+  color: var(--tk-text);
+}
+
+.tk-btn-ghost:hover:not(:disabled) {
+  background: #f4f6fb;
+}
+
+.tk-btn-danger {
+  background: var(--tk-danger);
+  color: #fff;
+}
+
+.tk-btn-danger:hover:not(:disabled) {
+  background: #be123c;
+}
+
+.tk-icon-btn {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--tk-muted);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.tk-icon-btn:hover {
+  background: #f1f3f9;
+  color: var(--tk-text);
+}
+
+.tk-icon-btn.tk-danger:hover {
+  background: #ffeef1;
+  color: var(--tk-danger);
+}
+
+/* -------------------------------- Cards -------------------------------- */
+
+.tk-card {
+  margin-top: 24px;
+  background: var(--tk-surface);
+  border: 1px solid var(--tk-border);
+  border-radius: var(--tk-radius);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+/* -------------------------------- Filtros -------------------------------- */
+
+.tk-filters {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 16px;
+  padding: 18px 20px;
+}
+
+.tk-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.tk-field label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--tk-muted);
+}
+
+.tk-field input,
+.tk-field select,
+.tk-field textarea {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid var(--tk-border);
+  border-radius: 10px;
+  background: var(--tk-surface);
+  color: var(--tk-text);
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.tk-field input,
+.tk-field select {
+  height: 40px;
+}
+
+.tk-field textarea {
+  resize: vertical;
+  min-height: 110px;
+  line-height: 1.5;
+}
+
+.tk-field input:focus,
+.tk-field select:focus,
+.tk-field textarea:focus {
+  border-color: var(--tk-primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+.tk-field input::placeholder,
+.tk-field textarea::placeholder {
+  color: var(--tk-soft);
+}
+
+.tk-input-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.tk-input-icon svg {
+  position: absolute;
+  left: 12px;
+  color: var(--tk-soft);
+  pointer-events: none;
+}
+
+.tk-input-icon input {
+  padding-left: 36px;
+}
+
+/* -------------------------------- Tabela -------------------------------- */
+
+.tk-table-card {
+  overflow: hidden;
+}
+
+.tk-table-scroll {
+  overflow-x: auto;
+}
+
+.tk-table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.tk-table thead th {
+  padding: 16px;
+  background: #fafbfd;
+  border-bottom: 1px solid var(--tk-border);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-align: left;
+  text-transform: uppercase;
+  color: var(--tk-muted);
+  white-space: nowrap;
+}
+
+.tk-table thead th:first-child,
+.tk-table tbody td:first-child {
+  padding-left: 20px;
+}
+
+.tk-table thead th:last-child,
+.tk-table tbody td:last-child {
+  padding-right: 20px;
+}
+
+.tk-th-actions {
+  text-align: right !important;
+}
+
+.tk-table tbody td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--tk-border);
+  vertical-align: middle;
+}
+
+.tk-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.tk-table tbody tr:hover {
+  background: #fbfbfe;
+}
+
+.tk-code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  color: var(--tk-muted);
+  white-space: nowrap;
+}
+
+.tk-title-cell {
+  min-width: 220px;
+  max-width: 280px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.tk-date-cell {
+  color: var(--tk-muted);
+  white-space: nowrap;
+}
+
+.tk-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+/* ------------------------------ Badges ------------------------------ */
+
+.tk-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  padding: 3px 9px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.tk-badge::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.tickets-layout .cat-it {
+  background: #eef0ff;
+  color: #4f46e5;
+}
+
+.tickets-layout .cat-hr {
+  background: #ffeef1;
+  color: #e11d48;
+}
+
+.tickets-layout .cat-purchases {
+  background: #fff6e0;
+  color: #d97706;
+}
+
+.tickets-layout .cat-finance {
+  background: #e6f8ef;
+  color: #059669;
+}
+
+.tickets-layout .cat-infrastructure {
+  background: #e8f5ff;
+  color: #0284c7;
+}
+
+.tk-status {
+  padding: 3px 10px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+}
+
+.tickets-layout .status-open {
+  background: #eef3ff;
+  border-color: #c7d8ff;
+  color: #2563eb;
+}
+
+.tickets-layout .status-in-progress {
+  background: #fff8e6;
+  border-color: #fde3a0;
+  color: #d97706;
+}
+
+.tickets-layout .status-completed {
+  background: #eafaf2;
+  border-color: #b5ecd0;
+  color: #059669;
+}
+
+/* ------------------------- Botão e menu de status ------------------------- */
+
+.tk-status-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 30px;
+  padding: 0 9px;
+  border: 1px solid var(--tk-border);
+  border-radius: 8px;
+  background: var(--tk-surface);
+  color: var(--tk-muted);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.tk-status-trigger:hover:not(:disabled) {
+  background: #f4f6fb;
+  color: var(--tk-text);
+}
+
+.tk-status-trigger:disabled {
+  cursor: progress;
+}
+
+.tk-status-menu {
+  position: fixed;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 190px;
+  padding: 8px;
+  background: var(--tk-surface);
+  border: 1px solid var(--tk-border);
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.14);
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.tk-status-menu-title {
+  padding: 4px 8px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--tk-soft);
+}
+
+.tk-status-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 7px 8px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #059669;
+  cursor: pointer;
+}
+
+.tk-status-option:hover:not(:disabled) {
+  background: #f4f6fb;
+}
+
+.tk-status-option:disabled {
+  cursor: default;
+  opacity: 0.8;
+}
+
+/* ------------------------- Estados (vazio, erro, carregando) ------------------------- */
+
+.tk-state-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-top: 96px;
+  font-size: 14px;
+  color: var(--tk-muted);
+}
+
+.tk-state-loading p {
+  margin: 0;
+}
+
+.tk-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid #e0e3f3;
+  border-top-color: var(--tk-primary);
+  border-radius: 50%;
+  animation: tk-spin 0.8s linear infinite;
+}
+
+.tk-spinner-sm {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-width: 2px;
+}
+
+@keyframes tk-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.tk-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 520px;
+  margin: 72px auto 0;
+  padding: 48px 32px;
+  text-align: center;
+  background: var(--tk-surface);
+  border: 1px dashed #cfd5e3;
+  border-radius: 18px;
+}
+
+.tk-empty h2,
+.tk-no-results h2 {
+  margin: 22px 0 8px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.tk-empty p,
+.tk-no-results p {
+  margin: 0;
+  max-width: 380px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--tk-muted);
+}
+
+.tk-empty .tk-btn {
+  margin-top: 26px;
+}
+
+.tk-empty-icon {
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: var(--tk-primary-soft);
+  color: var(--tk-primary);
+}
+
+.tk-empty-icon.error {
+  background: #ffeef1;
+  color: var(--tk-danger);
+}
+
+.tk-empty-icon.small {
+  width: 56px;
+  height: 56px;
+}
+
+.tk-no-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.tk-no-results h2 {
+  margin-top: 16px;
+  font-size: 16px;
+}
+
+.tk-no-results .tk-btn {
+  margin-top: 20px;
+}
+
+/* -------------------------------- Modais -------------------------------- */
+
+.tk-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(11, 18, 38, 0.55);
+  animation: tk-fade 0.15s ease;
+}
+
+.tk-modal {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 560px;
+  max-height: calc(100vh - 48px);
+  background: var(--tk-surface);
+  border-radius: 16px;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.3);
+  animation: tk-pop 0.18s ease;
+}
+
+.tk-modal-small {
+  max-width: 440px;
+}
+
+.tk-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--tk-border);
+}
+
+.tk-modal-header h2 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.tk-modal-body {
+  padding: 22px;
+  overflow-y: auto;
+}
+
+.tk-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 16px 22px;
+  border-top: 1px solid var(--tk-border);
+}
+
+.tk-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.tk-form-error {
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid #fecdd3;
+  border-radius: 10px;
+  background: #fff1f3;
+  font-size: 13px;
+  color: #be123c;
+}
+
+.tk-confirm-text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--tk-muted);
+}
+
+.tk-confirm-text strong {
+  color: var(--tk-text);
+}
+
+.tk-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 20px;
+  margin: 0;
+}
+
+.tk-details dt {
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--tk-muted);
+}
+
+.tk-details dd {
+  margin: 0;
+  font-size: 14px;
+}
+
+.tk-details-wide {
+  grid-column: 1 / -1;
+}
+
+.tk-details-title {
+  font-size: 16px !important;
+  font-weight: 600;
+}
+
+.tk-details-description {
+  line-height: 1.6;
+  white-space: pre-wrap;
+  color: #334155;
+}
+
+@keyframes tk-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes tk-pop {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* -------------------------------- Toast -------------------------------- */
+
+.tk-toast {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 70;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 380px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: #0b1226;
+  color: #fff;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 14px;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.3);
+  animation: tk-pop 0.18s ease;
+}
+
+.tk-toast.success svg {
+  color: #34d399;
+}
+
+.tk-toast.error svg {
+  color: #fb7185;
+}
+
+@media (max-width: 1100px) {
+  .tk-filters {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .tickets-main {
+    padding: 20px;
+  }
+
+  .tickets-header {
+    flex-direction: column;
+  }
+
+  .tk-filters {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .tk-details {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .tk-filters {
+    grid-template-columns: 1fr;
+  }
+}
