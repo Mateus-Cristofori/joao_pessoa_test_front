@@ -71,7 +71,7 @@ export interface TicketResponse {
   category: TicketCategoryEnum;
   status: TicketStatusEnum;
   createdAt: string;
-  requester?: string;
+  userEmail?: string;
 }
 
 export interface TicketFormData {

@@ -558,7 +558,7 @@ const Tickets = () => {
                             {categoryShortLabel[ticket.category]}
                           </span>
                         </td>
-                        <td>{ticket.requester ?? "—"}</td>
+                        <td>{ticket.userEmail ?? "—"}</td>
                         <td className="tk-date-cell">
                           {formatDate(ticket.createdAt)}
                         </td>
@@ -830,7 +830,7 @@ const Tickets = () => {
             </div>
             <div>
               <dt>Solicitante</dt>
-              <dd>{viewTicket.requester ?? "—"}</dd>
+              <dd>{viewTicket.userEmail ?? "—"}</dd>
             </div>
             <div>
               <dt>Data de abertura</dt>
